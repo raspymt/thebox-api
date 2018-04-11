@@ -1,9 +1,14 @@
 {
-  "name": "the-box-api",
-  "version": "1.0.0",
-  "main": "server/index.js",
-  "author": "Yves-Marie Trublin <yvestrublin@gmail.com>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:raspymt/thebox-api.git"
+  },
+  "name": "the-box-api",
+  "version": "0.0.1",
+  "description": "The Box API web management",
+  "main": "server/index.js",
+  "author": "Yves-Marie Trublin <yvestrublin@protonmail.com>",
   "dependencies": {
     "atob": "^2.1.0",
     "bcrypt": "^2.0.0",
