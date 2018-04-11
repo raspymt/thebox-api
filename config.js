@@ -7,6 +7,13 @@ module.exports = {
       database: 'thebox',
       password: '*<M/%?si2+pw4EdWYqgD',
       storage:  '.data/thebox.sqlite',
-      salt:     '2^PH?Qa~ueS!WsB+8r#f%E1DpK=CIGHe&Skl4_^~'
+      salt:     '2^PH?Qa~ueS!WsB+8r#f%E1DpK=CIGHe&Skl4_^~',
+    },
+    knex: {
+      client: 'sqlite3',
+      connection: {
+        filename: './.data/thebox.sqlite3'
+      },
+      useNullAsDefault: true      
     }
 }

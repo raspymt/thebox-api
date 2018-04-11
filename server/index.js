@@ -10,47 +10,45 @@ const sambaRoutes = require("./routes/samba.routes")
 const transmissionRoutes = require("./routes/transmission.routes")
 
 const PORT = process.env.PORT || require('../config').port
-// const PORT = 88
 const debug = process.env.NODE_ENV !== 'production'
 
 const app = new Koa({
-  // body: {
-  //   enabled: false
-  // },
-  // compress: {
-  //   enabled: false
-  // },
-  // cors: {
-  //   enabled: false
-  // },
+  body: {
+    enabled: false
+  },
+  compress: {
+    enabled: false
+  },
+  cors: {
+    enabled: false
+  },
   debug: {
     enabled: debug
   },
-  // etag: {
-  //   enabled: false
-  // },
-  // helmet: {
-  //   enabled: false
-  // },
-  // json: {
-  //   enabled: false
-  // },
+  etag: {
+    enabled: false
+  },
+  helmet: {
+    enabled: false
+  },
+  json: {
+    enabled: false
+  },
   logger: {
     enabled: debug
   },
-  // requestId: {
-  //   enabled: false
-  // },
-  // responseTime: {
-  //   enabled: false
-  // }
+  requestId: {
+    enabled: false
+  },
+  responseTime: {
+    enabled: false
+  }
 })
 
 app.use(bodyParser())
 
 app.use(baseRoutes.routes())
 app.use(usersRoutes.routes())
-// app.use(statusRoutes.routes())
 app.use(servicesRoutes.routes())
 app.use(networksRoutes.routes())
 app.use(mediasRoutes.routes())

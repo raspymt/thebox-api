@@ -1,6 +1,5 @@
 const env = process.env.NODE_ENV || "development"
-const config = require("../../knexfile")[env]
-const knex = require("knex")(config)
+const knex = require("knex")(require("../../config")['knex'])
 const jsonwebtoken = require('jsonwebtoken')
 const atob = require('atob')
 const bcrypt    = require('bcrypt')
