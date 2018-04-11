@@ -6,7 +6,7 @@ module.exports = {
   development: {
     client: 'sqlite3',
     connection: {
-      filename: './dev.sqlite3'
+      filename: './.data/dev.sqlite3'
     },
     migrations: {
       directory: path.join(BASE_PATH, 'migrations')
@@ -16,18 +16,10 @@ module.exports = {
     },
     useNullAsDefault: true
   },
-
-  // staging: {
-  //   client: 'sqlite3',
-  //   connection: {
-  //     filename: './staging.sqlite3'
-  //   }
-  // },
-
   production: {
     client: 'sqlite3',
     connection: {
-      filename: './thebox.sqlite3'
+      filename: './.data/thebox.sqlite3'
     },
     migrations: {
       directory: path.join(BASE_PATH, "migrations")
