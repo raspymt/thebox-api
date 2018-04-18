@@ -12,7 +12,7 @@ const updateConfigCredentials = (user, password) => {
     }
 
     if (transmissionService === true || transmissionService === null) {
-      exec(`sed -ie 's/   "rpc-username": .*/   "rpc-username": "${username}",/' ${transmissionConfigFile} && sed -ie 's/   "rpc-password": .*/   "rpc-password": "${password}",/' ${transmissionConfigFile}`, (error, stdout, stderr) => {
+      exec(`sed -i 's/   "rpc-username".*/   "rpc-username": "${username}",/' ${transmissionConfigFile} && sed -i 's/   "rpc-password".*/   "rpc-password": "${password}",/' ${transmissionConfigFile}`, (error, stdout, stderr) => {
         if (isActive === true) {
           // must start service after changing password
           systemctl.start('transmission')
