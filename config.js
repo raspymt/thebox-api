@@ -2,6 +2,7 @@ module.exports = {
     secret: 'UIw!VG%rFd9+-4NOmhJ|V&G^#Psk%Wg<vd~DYCQz<r0|XP$md_1>NLSqMfu+',
     port: 80,
     api: '/api/v1',
+    mediaDir: '/media',
     db: {
       username: 'thebox',
       database: 'thebox',

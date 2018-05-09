@@ -4,5 +4,4 @@ node_modules
 # logs
 npm-debug.log
 
-commands.txt
 dist

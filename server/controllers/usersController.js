@@ -1,4 +1,3 @@
-const env = process.env.NODE_ENV || "development"
 const knex = require("knex")(require("../../config")['knex'])
 const jsonwebtoken = require('jsonwebtoken')
 const atob = require('atob')
@@ -10,10 +9,10 @@ const index = async ctx => {
     ctx.body = {
       data: users
     }
-  } catch (error) {
+  } catch (e) {
     ctx.status = 401
     ctx.body = {
-      error: error
+      error: e
     }
   }
 }
@@ -30,10 +29,10 @@ const show = async ctx => {
     ctx.body = {
       data: user
     }
-  } catch (error) {
+  } catch (e) {
     ctx.status = 404
     ctx.body = {
-      error: error
+      error: e
     }
   }
 }
@@ -56,14 +55,14 @@ const create = async ctx => {
     ctx.body = {
       data: user
     }
-  } catch (error) {
-    if(error.code === 'SQLITE_CONSTRAINT') {
+  } catch (e) {
+    if(e.code === 'SQLITE_CONSTRAINT') {
       ctx.status = 409
     } else {
       ctx.status = 500
     }
     ctx.body = {
-      error: error
+      error: e
     }      
   }
 }
@@ -89,14 +88,13 @@ const login = async ctx => {
     } else if (comp === true) {
       const token = await jsonwebtoken.sign(
           {
-            id: user[0].id,
-            username: user[0].username,
+            // id: user[0].id,
+            // username: user[0].username,
             role: user[0].role
           },
           require('../../config').secret,
           { 
             expiresIn: '24h'
-            // expiresIn: '10s'
           }
         )
       if(!token) {
@@ -109,14 +107,14 @@ const login = async ctx => {
     } else {
       throw new Error("Error during password hash")
     }
-  } catch (error) {
-    if(error.toString() === 'Error: Error during password hash') {
+  } catch (e) {
+    if(e.toString() === 'Error: Error during password hash') {
       ctx.status = 500
     } else {
       ctx.status = 401
     }
     ctx.body = {
-      error: error
+      error: e
     }
   }
 }
@@ -152,10 +150,10 @@ const update = async ctx => {
     ctx.body = {
       success: result === 1
     }
-  } catch (error) {
+  } catch (e) {
     ctx.status = 500
     ctx.body = {
-      error: error
+      error: e
     }
   }
 }

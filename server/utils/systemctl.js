@@ -73,9 +73,14 @@ const reboot = async () => {
   }
 }
 
-// function restart(service_name) {
-//   return _exec("restart " + service_name)
-// }
+const restart = async service_name => {
+  try {
+    const service = await _exec('restart ' + service_name)
+    return service.stderr === '' ? true : false
+  } catch (error) {
+    return false
+  }
+}
 
 // function daemonReload() {
 //   return _exec("daemon-reload")
@@ -90,10 +95,14 @@ const reboot = async () => {
 //   }
 // }
 
-const isActive = async service_name => {
+const isActive = async (service_name, exclusive = true) => {
   try {
     const data = await _exec('is-active ' + service_name)
-    return data.stdout.indexOf('active') !== -1
+    console.log(service_name, ' exclusive ', data.stdout.indexOf('active') !== -1)
+    console.log(service_name, ' inclusive ', data.stdout.indexOf('inactive') === -1)
+    return exclusive === true
+      ? data.stdout.indexOf('active') !== -1
+      : data.stdout.indexOf('inactive') === -1
   } catch (error) {
     return false
   }
@@ -124,7 +133,7 @@ module.exports = {
   disableNow,
   start,
   stop,
+  restart,
   poweroff,
   reboot
-  // restart
 }

@@ -3,10 +3,10 @@ const online = async ctx => {
     ctx.body = {
       online: true
     }
-  } catch (error) {
+  } catch (e) {
     ctx.status = 500
     ctx.body = {
-      error: error
+      error: e
     }    
   }
 }
