@@ -32,6 +32,9 @@ const statuses = async () => {
       },
       accesspoint: {
         active: await systemctl.isActive('hostapd.service')
+      },
+      ssh: {
+        active: await systemctl.isActive('sshd.service')
       }
     }
   } catch(e) {
@@ -67,6 +70,9 @@ const startService = async application => {
         break
       case 'accesspoint':
         return systemctl.enableNow('hostapd.service')
+        break
+      case 'ssh':
+        return systemctl.enableNow('sshd.service')
         break
       case 'rescanUpnpDlna':
         return systemctl.stop('minidlna.service')
@@ -112,6 +118,9 @@ const stopService = async application => {
         break
       case 'accesspoint':
         return systemctl.disableNow('hostapd.service')
+        break
+      case 'ssh':
+        return systemctl.disableNow('sshd.service')
         break
     }
   } catch (e) {
