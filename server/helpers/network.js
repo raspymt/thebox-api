@@ -6,6 +6,10 @@ const testChar = /(\\x[\d\w]{2})/g;
 
 const list = async () => {
   try {
+    // const buf = Buffer.from("My Tr\xe1\xba\xa7n", 'ascii');
+    console.log(Buffer.from('80', 'hex').toString('utf8'))
+
+
     let networks = await iw.getNetworks(interface)
     networks.sort((a, b) => {
       return b.signal - a.signal

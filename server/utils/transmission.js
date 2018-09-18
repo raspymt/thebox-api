@@ -6,7 +6,7 @@ const transmissionConfigFile = '/home/thebox/.config/transmission-daemon/setting
 const updateTransmissionConfigCredentials = async (username, password) => {
   try {
     const isActive = await systemctl.isActive('transmission.service')
-    let transmissionService = null
+    let transmissionService = true
     if (isActive === true) {
       // must stop service before changing password
       transmissionService = await systemctl.stop('transmission.service')    

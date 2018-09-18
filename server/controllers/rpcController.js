@@ -5,7 +5,7 @@ const filesharing = require('../helpers/filesharing')
 const mpd = require('../helpers/mpd')
 const torrent = require('../helpers/torrent')
 const filesystem = require('../helpers/filesystem')
-const cloudstorage = require('../helpers/cloudstorage')
+const accesspoint = require('../helpers/accesspoint')
 
 
 
@@ -73,11 +73,8 @@ const set = async ctx => {
       case 'torrentCredentials':
         res = await torrent.updateCredentials(params.credentials)
         break
-      case 'createCloudStorageDirectory':
-        res = await cloudstorage.createStorageDirectory(params.directory)
-        break
-      case 'setCloudStorageDirectory':
-        res = await cloudstorage.setStorageDirectory(params.directory, params.recovery)
+      case 'accesspointUpdate':
+        res = await accesspoint.updateAccesspoint(params.credentials)
         break
       default:
         throw new Error('Action not found')

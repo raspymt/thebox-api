@@ -98,8 +98,8 @@ const restart = async service_name => {
 const isActive = async (service_name, exclusive = true) => {
   try {
     const data = await _exec('is-active ' + service_name)
-    console.log(service_name, ' exclusive ', data.stdout.indexOf('active') !== -1)
-    console.log(service_name, ' inclusive ', data.stdout.indexOf('inactive') === -1)
+    // console.log(service_name, ' exclusive ', data.stdout.indexOf('active') !== -1)
+    // console.log(service_name, ' inclusive ', data.stdout.indexOf('inactive') === -1)
     return exclusive === true
       ? data.stdout.indexOf('active') !== -1
       : data.stdout.indexOf('inactive') === -1

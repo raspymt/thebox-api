@@ -15,8 +15,8 @@ const debug = process.env.NODE_ENV !== 'production'
 const app = new Koa({
   // must be set to true if the SAP is not on the same server
   cors: {
-    enabled: true
-    // enabled: debug
+    // enabled: true
+    enabled: debug
   },
   body: {
     enabled: false

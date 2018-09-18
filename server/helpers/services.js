@@ -1,6 +1,6 @@
 const systemctl = require('../utils/systemctl')
 const transmission = require('../utils/transmission')
-const seafile = require('../utils/seafile')
+const hostapd = require('../utils/hostapd')
 
 const statuses = async () => {
   try {
@@ -23,18 +23,21 @@ const statuses = async () => {
         active: await systemctl.isActive('transmission.service'),
         username: await transmission.getTransmissionConfigUsername()
       },
-      cloudstorage: {
-        active: await systemctl.isActive('seafile-server@thebox.service'),
-        storageFolder: await seafile.getStorageFolder()
-      },
       wifi: {
         active: await systemctl.isActive('wpa_supplicant@wlan0.service')
       },
       accesspoint: {
-        active: await systemctl.isActive('hostapd.service')
+        active: await systemctl.isActive('hostapd.service'),
+        ssid: await hostapd.getHostapdSsid()
       },
       ssh: {
         active: await systemctl.isActive('sshd.service')
+      },
+      syncthing: {
+        active: await systemctl.isActive('syncthing@thebox.service')
+      },
+      resilio: {
+        active: await systemctl.isActive('rslsync.service')
       }
     }
   } catch(e) {
@@ -62,9 +65,6 @@ const startService = async application => {
           && systemctl.disableNow('minidlna-rebuild.service')
           && systemctl.enableNow('minidlna.service')
         break
-      case 'cloudstorage':
-        return systemctl.enableNow('seafile-server@thebox.service')
-        break
       case 'wifi':
         return systemctl.enableNow('wpa_supplicant@wlan0.service')
         break
@@ -83,6 +83,12 @@ const startService = async application => {
         return systemctl.stop('minidlna.service')
           && systemctl.stop('minidlna-rescan.service')
           && systemctl.start('minidlna-rebuild.service')
+        break
+      case 'syncthing':
+        return systemctl.enableNow('syncthing@thebox.service')
+        break
+      case 'resilio':
+        return systemctl.enableNow('rslsync.service')
         break
     }
   } catch (e) {
@@ -110,9 +116,6 @@ const stopService = async application => {
           && systemctl.disableNow('minidlna-rescan.service')
           && systemctl.disableNow('minidlna-rebuild.service')
         break
-      case 'cloudstorage':
-        return systemctl.disableNow('seafile-server@thebox.service')
-        break
       case 'wifi':
         return systemctl.disableNow('wpa_supplicant@wlan0.service')
         break
@@ -121,6 +124,12 @@ const stopService = async application => {
         break
       case 'ssh':
         return systemctl.disableNow('sshd.service')
+        break
+      case 'syncthing':
+        return systemctl.disableNow('syncthing@thebox.service')
+        break
+      case 'resilio':
+        return systemctl.disableNow('rslsync.service')
         break
     }
   } catch (e) {
