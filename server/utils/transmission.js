@@ -13,7 +13,7 @@ const updateTransmissionConfigCredentials = async (username, password) => {
     }
 
     if (transmissionService === true) {
-      const result = await exec(`sed -i 's/   "rpc-username".*/   "rpc-username": "${username}",/' ${transmissionConfigFile} && sed -i 's/   "rpc-password".*/   "rpc-password": "${password}",/' ${transmissionConfigFile}`)
+      const result = await exec(`sudo sed -i 's/   "rpc-username".*/   "rpc-username": "${username}",/' ${transmissionConfigFile} && sudo sed -i 's/   "rpc-password".*/   "rpc-password": "${password}",/' ${transmissionConfigFile}`)
 
       if (isActive === true) {
         // must start service after changing password

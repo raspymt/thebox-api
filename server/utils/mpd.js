@@ -7,7 +7,7 @@ const updateMPDPassword = (password) => {
     const isActiveSocket = await systemctl.isActive('mpd.socket')
     const isActiveService = await systemctl.isActive('mpd.service')
     
-    exec(`sed -i 's/password .*/password "${password}@read,add,control,admin"/' ${mpdConfigFile}`, (error, stdout, stderr) => {
+    exec(`sudo sed -i 's/password .*/password "${password}@read,add,control,admin"/' ${mpdConfigFile}`, (error, stdout, stderr) => {
       if (isActiveSocket === true) {
         systemctl.restart('mpd.socket')
       }

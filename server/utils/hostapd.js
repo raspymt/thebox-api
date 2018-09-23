@@ -22,7 +22,7 @@ const updateHostapdAccesspoint = async (ssid, password) => {
     const pwd = password.split("\\").join("\\\\").split("$").join("\\\$").split("\"").join("\\\"").split("`").join("\\\`")
 
     // replace SSID name and generate new encrypted password
-    const result = await exec(`sed -ie 's/^ssid=.*/ssid=${ssid}/' ${hostapdConfigFile} && wpa_passphrase "${ssid}" "${pwd}" | grep -P  "^\tpsk" | cut -d = -f 2 | awk '{print "00:00:00:00:00:00 " $1}' > ${hostapdPskFile}`)
+    const result = await exec(`sudo sed -ie 's/^ssid=.*/ssid=${ssid}/' ${hostapdConfigFile} && wpa_passphrase "${ssid}" "${pwd}" | grep -P  "^\tpsk" | cut -d = -f 2 | awk '{print "00:00:00:00:00:00 " $1}' | sudo tee ${hostapdPskFile} > /dev/null`)
 
     const isActive = await systemctl.isActive('hostapd.service')
     if (isActive === true) {

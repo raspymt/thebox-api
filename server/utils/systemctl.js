@@ -119,7 +119,7 @@ const isActive = async (service_name, exclusive = true) => {
 
 function _exec(command) {
    // return exec("sudo systemctl " + command)
-  return exec('systemctl ' + command)
+  return exec('sudo systemctl ' + command)
 }
 
 
