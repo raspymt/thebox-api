@@ -54,7 +54,7 @@ const set = async ctx => {
         res = await system[action]()
         break
       case 'unmount':
-        res = await systemm[action](params.media)
+        res = await system[action](params.media)
         break
       case 'startService':
       case 'stopService':
