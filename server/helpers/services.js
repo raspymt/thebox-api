@@ -24,7 +24,7 @@ const statuses = async () => {
         username: await transmission.getTransmissionConfigUsername()
       },
       wifi: {
-        active: await systemctl.isActive('wpa_supplicant@wlan0.service')
+        active: await systemctl.isActive('supplicant@wlan0.service')
       },
       accesspoint: {
         active: await systemctl.isActive('hostapd.service'),
@@ -66,14 +66,14 @@ const startService = async application => {
           && systemctl.enableNow('minidlna.service')
         break
       case 'wifi':
-        return systemctl.enableNow('wpa_supplicant@wlan0.service')
+        return systemctl.enableNow('supplicant@wlan0.service')
         break
       case 'accesspoint':
         return systemctl.enableNow('hostapd.service')
         break
-      case 'ssh':
-        return systemctl.enableNow('sshd.service')
-        break
+      // case 'ssh':
+      //   return systemctl.enableNow('sshd.service')
+      //   break
       case 'rescanUpnpDlna':
         return systemctl.stop('minidlna.service')
           && systemctl.stop('minidlna-rebuild.service')
@@ -117,14 +117,14 @@ const stopService = async application => {
           && systemctl.disableNow('minidlna-rebuild.service')
         break
       case 'wifi':
-        return systemctl.disableNow('wpa_supplicant@wlan0.service')
+        return systemctl.disableNow('supplicant@wlan0.service')
         break
       case 'accesspoint':
         return systemctl.disableNow('hostapd.service')
         break
-      case 'ssh':
-        return systemctl.disableNow('sshd.service')
-        break
+      // case 'ssh':
+      //   return systemctl.disableNow('sshd.service')
+      //   break
       case 'syncthing':
         return systemctl.disableNow('syncthing@thebox.service')
         break
