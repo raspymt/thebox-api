@@ -49,7 +49,7 @@ const startService = async application => {
   try {
     switch (application) {
       case 'mpd':
-        return systemctl.enableNow('mpd.socket')
+        return systemctl.enableNow('mpd.service')
         break
       case 'mpdgui':
         return systemctl.enableNow('ympd.service')
