@@ -14,8 +14,9 @@ const getHostapdSsid = async () => {
   } catch (e) {
     console.log(e)
   }
-
 }
+
+
 
 const updateHostapdAccesspoint = async (ssid, password) => {
   try {

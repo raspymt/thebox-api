@@ -76,6 +76,9 @@ const set = async ctx => {
       case 'accesspointUpdate':
         res = await accesspoint.updateAccesspoint(params.credentials)
         break
+      case 'connectWifi':
+        res = await network.connectWifi(params)
+        break
       default:
         throw new Error('Action not found')
         break

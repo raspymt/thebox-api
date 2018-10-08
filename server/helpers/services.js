@@ -69,6 +69,9 @@ const startService = async application => {
         return systemctl.enableNow('supplicant@wlan0.service')
         break
       case 'accesspoint':
+        // we need to restart minidlna if running
+        // const minidlna = await systemctl.isActive('minidlna.service')
+        // if(minidlna === true) systemctl.restart('minidlna.service')
         return systemctl.enableNow('hostapd.service')
         break
       // case 'ssh':
