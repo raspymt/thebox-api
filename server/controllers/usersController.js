@@ -88,8 +88,8 @@ const login = async ctx => {
     } else if (comp === true) {
       const token = await jsonwebtoken.sign(
           {
-            // id: user[0].id,
-            // username: user[0].username,
+            id: user[0].id,
+            username: user[0].username,
             role: user[0].role
           },
           require('../../config').secret,
